@@ -32,7 +32,7 @@ var mainState = {
 		this.deathLabel = game.add.text(game.width - 100, game.height - 30, "Deaths: 0", { font: '18px Arial', fill: '#ffffff' });
 		this.deathCount = 0;
 		
-		this.timerLabel = game.add.text(game.width/2, 30, "120", { font: '18px Arial', fill: '#ffffff' });
+		this.timerLabel = game.add.text(game.width - 100, 30, "120", { font: '18px Arial', fill: '#ffffff' });
 		this.timer = 120;
 		game.time.events.loop(1000, this.subTime, this);
 		
@@ -41,14 +41,13 @@ var mainState = {
         this.enemies.createMultiple(10, 'enemy');
         game.time.events.loop(2200, this.addEnemy, this);
 		
-		this.prevE = 10;
-		this.currentE = 11;
 		this.overlap = false;
+		
+		
     },
 
     update: function() {
-       if(this.timer != 0)
-	   {
+     
 			game.physics.arcade.collide(this.player, this.walls);
 			game.physics.arcade.collide(this.enemies, this.walls);
 			game.physics.arcade.overlap(this.player, this.coin, this.takeCoin, null, this);
@@ -57,19 +56,25 @@ var mainState = {
 		   if(!(game.physics.arcade.overlap(this.player, this.enemies, this.playerDie, null, this)))
 		   {
 			   this.overlap = false;
-		   }
+		   } 
 		
-		
+		  if(this.timer != 0)
+	   {
 
 			this.movePlayer(); 
 
 			if (!this.player.inWorld) {
-				this.playerDie();
+				this.playerOutWorld();
 			}
+		
+			
+			
 	   }
+		
     },
 
-    movePlayer: function() {
+
+		movePlayer: function() {
         if (this.cursor.left.isDown) {
             this.player.body.velocity.x = -200;
         }
@@ -81,9 +86,22 @@ var mainState = {
         }
 
         if (this.cursor.up.isDown && this.player.body.touching.down) {
+					
+			
             this.player.body.velocity.y = -320;
+			
+		
         }      
+			
+			
     },
+	
+	
+   checkOverlap: function(spriteA, spriteB) {
+
+   
+
+},
 
     takeCoin: function(player, coin) {
         this.score += 5;
@@ -94,9 +112,9 @@ var mainState = {
 
     updateCoinPosition: function() {
         var coinPosition = [
-            {x: 140, y: 60}, {x: 360, y: 60}, 
-            {x: 60, y: 140}, {x: 440, y: 140}, 
-            {x: 130, y: 300}, {x: 370, y: 300} 
+          {x: 140, y: 60}, {x: 360, y: 60}, 
+			{x: 60, y: 140}, {x: 440, y: 140}, 
+			{x: 130, y: 300}, {x: 370, y: 300} 
         ];
 
         for (var i = 0; i < coinPosition.length; i++) {
@@ -154,8 +172,8 @@ var mainState = {
         middleTop.scale.setTo(1.5, 1);
         var middleBottom = game.add.sprite(100, 240, 'wallH', 0, this.walls);
         middleBottom.scale.setTo(1.5, 1);
-
-        this.walls.setAll('body.immovable', true);
+		
+       this.walls.setAll('body.immovable', true);
     },
 
     
@@ -172,7 +190,35 @@ var mainState = {
 		
 	   
     },
+	
+	playerOutWorld: function() {
+		
+		 var playerPosition = [
+		 
+            {x: 140, y: 60}, {x: 60, y: 300}, 
+            {x: 60, y: 140}, {x: 440, y: 140}, 
+            {x: 130, y: 300}, {x: 370, y: 300}, 
+			{x: 250, y: 224}, {x: 340, y:130}, 
+		    {x: 280, y:144}, {x: 160, y:304}, 
+		    {x: 160, y: 215}, {x: 440, y:280},
+			{x: 300, y: 60}, {x: 270, y:60}			
+
+        ];
+
+
+		for (var i = 0; i < playerPosition.length; i++) {
+			if (playerPosition[i].x == this.player.x) {
+				playerPosition.splice(i, 1);
+			}
+		}
+
+        var newPosition = game.rnd.pick(playerPosition);
+        this.player.reset(newPosition.x, newPosition.y);
+		
+	},
+
 };
+
 
 var game = new Phaser.Game(500, 340, Phaser.AUTO, 'gameDiv');
 game.state.add('main', mainState);
