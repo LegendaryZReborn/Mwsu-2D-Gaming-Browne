@@ -18,7 +18,7 @@ var mainState = {
         this.player = game.add.sprite(game.width/2, game.height/2, 'player');
         this.player.anchor.setTo(0.5, 0.5);
         game.physics.arcade.enable(this.player);
-        this.player.body.gravity.y = 500;
+        this.player.body.gravity.y = 500; 
 
         this.createWorld();
 
@@ -32,7 +32,7 @@ var mainState = {
 		this.deathLabel = game.add.text(game.width - 100, game.height - 30, "Deaths: 0", { font: '18px Arial', fill: '#ffffff' });
 		this.deathCount = 0;
 		
-		this.timerLabel = game.add.text(game.width - 100, 30, "120", { font: '18px Arial', fill: '#ffffff' });
+		this.timerLabel = game.add.text(game.width - 60, 30, "120", { font: '18px Arial', fill: '#ffffff' });
 		this.timer = 120;
 		game.time.events.loop(1000, this.subTime, this);
 		
