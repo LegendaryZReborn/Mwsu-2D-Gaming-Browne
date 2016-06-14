@@ -105,14 +105,6 @@ var playState = {
         }      		
     },
 	
-	stopPlayer: function(){
-		
-		    this.player.body.velocity.x = 0;
-			this.player.animations.stop(); // Stop animations
-			this.player.frame = 0; // Change frame (stand still)
-	},
-
-	
 
     takeCoin: function(player, coin) {
         game.global.score += 5;
@@ -185,8 +177,7 @@ var playState = {
     
 	playerDie: function() {
 		
-		this.stopPlayer();
-		this.player.alive = false;
+		this.player.kill(); 
 		// Set the position of the emitter on top of the player
 		this.emitter.x = this.player.x;
 		this.emitter.y = this.player.y;
