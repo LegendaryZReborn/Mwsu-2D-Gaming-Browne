@@ -246,10 +246,22 @@ SpaceHipster.Game.prototype = {
 	},
 
 	destroyAsteroid: function(asteroid, bullet){
+		
+			 //play explosion sound
+		this.explosionSound.play();
+
+		//make the player explode
+		var emitter = this.game.add.emitter(asteroid.x, asteroid.y, 200);
+		emitter.makeParticles('playerParticle');
+		emitter.minParticleSpeed.setTo(-200, -200);
+		emitter.maxParticleSpeed.setTo(200, 200);
+		emitter.gravity = 0;
+		emitter.start(true, 1000, null, 100);
 		asteroid.kill();
 		bullet.kill();
+		
 	},
-  
+	
 };
 
 /*
