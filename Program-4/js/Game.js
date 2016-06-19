@@ -141,8 +141,10 @@ SpaceHipster.Game.prototype = {
    
     //add sprite
     asteroid = this.asteroids.create(this.game.world.randomX, this.game.world.randomY, 'rock');
-    asteroid.scale.setTo(this.game.rnd.weightedPick([1, 1.1, 1.2, 1.3, 1.4, 1.5, 1.6, 1.7, 1.8, 1.9, 2, 2.1, 2.2,
-		  2.3, 2.4, 2.4, 2.5, 2.6, 2.7, 2.8, 2.9, 3, 3.1, 3.2, 3.3,3.4, 3.5, 3.6, 3.7, 3.8, 3.9, 4, 4.1, 4.2, 4.3, 4.4, 4.5, 4.6, 4.7, 4.8, 4.9, 5]));
+    asteroid.scale.setTo(this.game.rnd.weightedPick([1, 1, 1.1, 1.1, 1.2, 1.2, 1.3, 1.3, 1.4, 1.4, 1.5, 1.5, 1.6,
+		  1.6, 1.7, 1.7, 1.8, 1.8, 1.9, 1.9, 2, 2, 2.1, 2.1, 2.2, 2.2, 2.3, 2.3, 2.4, 2.4, 2.5, 2.5, 2.6, 2.6, 2.7,
+		  2.7, 2.8, 2.8, 2.9, 2.9, 3, 3, 3.1, 3.2, 3.3,3.4, 3.5, 3.6, 3.7, 3.8, 3.9, 4, 4.1, 4.2, 4.3, 
+		  4.4, 4.5, 4.6, 4.7, 4.8, 4.9, 5]));
 	
 	  //physics properties  
 	  speed = this.game.rnd.weightedPick([90, 85, 80, 75, 70, 65, 20]);
@@ -259,6 +261,9 @@ SpaceHipster.Game.prototype = {
 		emitter.start(true, 1000, null, 100);
 		asteroid.kill();
 		bullet.kill();
+		
+		//for every asteroid destroyed another is generated, this way the field is never empty
+	   this.generateAsteroid();
 		
 	},
 	
