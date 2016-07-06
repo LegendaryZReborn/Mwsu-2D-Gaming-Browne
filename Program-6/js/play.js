@@ -230,13 +230,18 @@ function player(index, game,proxyServer) {
        */
 		
 			    this.sprite.tint = state.tint;
-				this.sprite.x = state.x;
+				this.sprite.x = state.x; 
 				this.sprite.y = state.y;
 			
     };
 
     player.prototype.update = function() {
 			
+			for(var p in this.game.global.playerList)
+			{
+				this.game.physics.arcade.collide(this.sprite, this.game.global.playerList[p].sprite);
+				console.log(this.game.global.playerList[p].sprite);
+			}
 			
 			   this.state.tint = this.tint;
 				this.state.x = this.sprite.x;
