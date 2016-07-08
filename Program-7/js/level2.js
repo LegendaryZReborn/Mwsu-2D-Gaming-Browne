@@ -142,12 +142,6 @@ var level2State = {
 		
     },
 	
-	render : function() {
-
-    game.debug.body(this.player);
-
-},
-
 
 		movePlayer: function() {
 			

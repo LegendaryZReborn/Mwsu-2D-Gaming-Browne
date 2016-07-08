@@ -117,7 +117,7 @@ var level1State = {
 			game.physics.arcade.collide(this.player, this.layer);
 			game.physics.arcade.collide(this.enemies, this.layer);
 			game.physics.arcade.collide(this.fireballs, this.layer);
-			
+			 
 			
 			
 			if (!this.player.alive) {
@@ -143,12 +143,6 @@ var level1State = {
 		
     },
 	
-	render : function() {
-
-    game.debug.body(this.player);
-	
-
-},
 
 
 
