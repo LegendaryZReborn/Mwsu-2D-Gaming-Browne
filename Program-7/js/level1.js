@@ -191,7 +191,7 @@ var level1State = {
 		game.add.tween(this.player.scale).to({x: 1.3, y: 1.3}, 100).yoyo(true).start();
 	
 		
-		if(game.global.score >= 10)
+		if(game.global.score >= 20) 
 		{
 			this.bgm.stop();
 			game.state.start('level2');
